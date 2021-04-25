@@ -56,7 +56,7 @@ CREATE TABLE `alerts`(
     foreign key (`username`) references `account`(`username`)
 );
 
-INSERT INTO `alerts` VALUES ('emily', '1', '21.50', 'You've been outbid!');
+INSERT INTO `alerts` VALUES ('emily', '1', '21.50', 'You have been outbid!');
 
 DROP TABLE IF EXISTS `autobid`;
 CREATE TABLE `autobid`(
