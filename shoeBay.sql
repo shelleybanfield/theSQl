@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS `shoeBay`;
 USE `shoeBay`;
 
-
 DROP TABLE IF EXISTS `bid`;
 DROP TABLE IF EXISTS `customerRepresentatives`;
 DROP TABLE IF EXISTS `autobid`;
@@ -18,10 +17,10 @@ INSERT INTO `account` VALUES ('emily', 'emily', 'customer'),
 							('alyssa', 'password', 'customer'),
 							('admin1', 'admin', 'admin'),
 							('customRep1', 'customRep', 'customerRepresentative');
-               
+
 DROP TABLE IF EXISTS `shoes`;
 CREATE TABLE `shoes`(
-	`serialNumber` INT NOT NULL AUTO_INCREMENT ,
+	`serialNumber` INT NOT NULL AUTO_INCREMENT,
 	`biddingPrice` FLOAT,
 	`reserve` FLOAT,
 	`size` FLOAT,
@@ -29,6 +28,7 @@ CREATE TABLE `shoes`(
 	`demographic` VARCHAR(5),
 	`style` VARCHAR(15),
     `endi` DATETIME,
+    `seller` VARCHAR(50),
 	PRIMARY KEY (`serialNumber`)
 );
 ALTER TABLE `shoes` AUTO_INCREMENT = 1;
@@ -41,29 +41,31 @@ CREATE TABLE `bid`(
 	`price` FLOAT,
     `serialNumber` INT,
     `username` VARCHAR(50),
+    PRIMARY KEY(`price`, `serialNumber`),
 	foreign key (`serialNumber`) references `shoes`(`serialNumber`),
     foreign key (`username`) references `account`(`username`)
-    );
+);
     
 DROP TABLE IF EXISTS `alerts`;
 CREATE TABLE `alerts`(
-`username` VARCHAR(50),
-`serialNumber` INT,
-`price` FLOAT,
-	foreign key (`serialNumber`) references `shoes`(`serialNumber`),
+	`username` VARCHAR(50),
+	`serialNumber` INT,
+	`price` FLOAT,
+    foreign key (`serialNumber`) references `shoes`(`serialNumber`),
     foreign key (`username`) references `account`(`username`)
 );
 
 DROP TABLE IF EXISTS `autobid`;
 CREATE TABLE `autobid`(
-	`currBid` FLOAT,
-    `highestBid` FLOAT,
-    `increment` FLOAT,
+	`currBid` INT,
+    `highestBid` INT,
+    `increment` INT,
     `serialNumber` INT,
     `username` VARCHAR(50), 
     foreign key (`serialNumber`) references `shoes`(`serialNumber`),
     foreign key (`username`) references `account`(`username`),
-    PRIMARY KEY(`serialNumber`, `username`));
+    PRIMARY KEY(`serialNumber`, `username`)
+);
 
 DROP TABLE IF EXISTS `summarySalesReports`;
 CREATE TABLE `summarySalesReports`(
@@ -78,8 +80,8 @@ CREATE TABLE `summarySalesReports`(
 CREATE TABLE `customerRepresentatives`(
 	`representativeID` INT,
 	`username` VARCHAR(50),
-  `password` VARCHAR(128),
-  PRIMARY KEY (`representativeID`),
-  FOREIGN KEY (`username`) REFERENCES `account` (`username`),
-  FOREIGN KEY (`password`) REFERENCES `account` (`password`)
+	`password` VARCHAR(128),
+	PRIMARY KEY (`representativeID`),
+	FOREIGN KEY (`username`) REFERENCES `account`(`username`),
+	FOREIGN KEY (`password`) REFERENCES `account`(`password`)
 );
