@@ -46,6 +46,7 @@ CREATE TABLE `bid`(
     foreign key (`username`) references `account`(`username`)
 );
     
+INSERT INTO `bid` VALUES ('10', '3', 'emily');
 DROP TABLE IF EXISTS `alerts`;
 CREATE TABLE `alerts`(
 `username` VARCHAR(50),
@@ -69,6 +70,7 @@ CREATE TABLE `autobid`(
     foreign key (`username`) references `account`(`username`),
     PRIMARY KEY(`serialNumber`, `username`)
 );
+INSERT INTO `autobid` VALUES ('10', '20', '5', '3', 'alyssa');
 
 DROP TABLE IF EXISTS `summarySalesReports`;
 CREATE TABLE `summarySalesReports`(
@@ -79,7 +81,6 @@ CREATE TABLE `summarySalesReports`(
 	`endUser` VARCHAR(50),
 	PRIMARY KEY (`salesID`)
 );
-
 CREATE TABLE `customerRepresentatives`(
 	`representativeID` INT,
 	`username` VARCHAR(50),
