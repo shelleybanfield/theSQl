@@ -48,10 +48,11 @@ CREATE TABLE `bid`(
     
 DROP TABLE IF EXISTS `alerts`;
 CREATE TABLE `alerts`(
-	`username` VARCHAR(50),
-	`serialNumber` INT,
-	`price` FLOAT,
-    foreign key (`serialNumber`) references `shoes`(`serialNumber`),
+`username` VARCHAR(50),
+`serialNumber` INT,
+`price` FLOAT,
+`alertType` VARCHAR(100),
+	foreign key (`serialNumber`) references `shoes`(`serialNumber`),
     foreign key (`username`) references `account`(`username`)
 );
 
